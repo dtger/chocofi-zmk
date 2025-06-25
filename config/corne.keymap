@@ -38,8 +38,8 @@
         td4: tap_dance_4 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp R &kp B>; };
         td5: tap_dance_5 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp N2 &kp ESC>; };
         td6: tap_dance_6 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp N4 &kp N4 &kp N3 &kp N4>; };
-        td7: tap_dance_7 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp PG_UP &mkp C_WH_DN>; };
-        td8: tap_dance_8 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp PG_DN &mkp C_WH_UP>; };
+        td7: tap_dance_7 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp PG_UP &mwh DOWN>; };
+        td8: tap_dance_8 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp PG_DN &mwh UP>; };
         td9: tap_dance_9 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp N1 &kp G &kp N2>; };
         td10: tap_dance_10 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&mkp MB4 &kp HOME>; };
         td11: tap_dance_11 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&mkp MB5 &kp END>; };
@@ -114,9 +114,9 @@
 
         layer_3 { // Mouse
             bindings = <
-&trans  &kp K_NO        &mkp MB1        &mkp MS_U       &mkp MB2        &mkp WH_D       &td11           &td7            &td10           &kp LC(LA(LS(O))) &kp K_NO      &trans
-&trans  &kp K_NO        &mkp MS_L       &mkp MS_D       &mkp MS_R       &kp K_NO        &mkp WH_U       &mkp MB2        &td8            &mkp MB1        &kp LG(N2)      &trans
-&trans  &kp K_NO        &mkp MB4        &kp PG_DN       &mkp MB5        &mkp WH_U       &kp K_NO        &mkp C_WH_L      &kp K_NO        &mkp C_WH_R      &td14         &trans
+&trans  &kp K_NO        &mkp MB1        &mkp MS_U       &mkp MB2        &mwh DOWN       &td11           &td7            &td10           &kp LC(LA(LS(O))) &kp K_NO      &trans
+&trans  &kp K_NO        &mkp MS_L       &mkp MS_D       &mkp MS_R       &kp K_NO        &mwh UP         &mkp MB2        &td8            &mkp MB1        &kp LG(N2)      &trans
+&trans  &kp K_NO        &mkp MB4        &kp PG_DN       &mkp MB5        &mwh UP         &kp K_NO        &mwh LEFT       &kp K_NO        &mwh RIGHT      &td14         &trans
                                 &kp K_NO        &to 0           &osm LSHFT                      &kp K_NO        &kp K_NO        &kp RGUI
             >;
         };
