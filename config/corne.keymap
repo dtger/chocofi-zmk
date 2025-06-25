@@ -27,45 +27,45 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT | MOD_RSFT)>;
-            bindings = <&kp DEL>, <&kp BSPC>;
+            bindings = <&kp DEL &kp BSPC>;
         };
 
         // Tap-Dances
-        td0: tap_dance_0 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp FSLH>, <&kp UNDER>; };
-        td1: tap_dance_1 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp K_NO>, <&kp K_NO>; };
-        td2: tap_dance_2 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp DOT>, <&kp EXCL>; };
-        td3: tap_dance_3 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp K_NO>, <&kp K_NO>; };
-        td4: tap_dance_4 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp R>, <&kp B>; };
-        td5: tap_dance_5 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp N2>, <&kp ESC>; };
-        td6: tap_dance_6 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp N4>, <&kp N4>, <&kp N3>, <&kp N4>; };
-        td7: tap_dance_7 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp PG_UP>, <&mkp C_WH_DN>; };
-        td8: tap_dance_8 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp PG_DN>, <&mkp C_WH_UP>; };
-        td9: tap_dance_9 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp N1>, <&kp G>, <&kp N2>; };
-        td10: tap_dance_10 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&mkp MB4>, <&kp HOME>; };
-        td11: tap_dance_11 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&mkp MB5>, <&kp END>; };
-        td12: tap_dance_12 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp K_NO>, <&to 0>; };
-        td13: tap_dance_13 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp T>, <&kp TAB>; };
+        td0: tap_dance_0 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp FSLH &kp UNDER>; };
+        td1: tap_dance_1 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp K_NO &kp K_NO>; };
+        td2: tap_dance_2 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp DOT &kp EXCL>; };
+        td3: tap_dance_3 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp K_NO &kp K_NO>; };
+        td4: tap_dance_4 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp R &kp B>; };
+        td5: tap_dance_5 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp N2 &kp ESC>; };
+        td6: tap_dance_6 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp N4 &kp N4 &kp N3 &kp N4>; };
+        td7: tap_dance_7 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp PG_UP &mkp C_WH_DN>; };
+        td8: tap_dance_8 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp PG_DN &mkp C_WH_UP>; };
+        td9: tap_dance_9 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp N1 &kp G &kp N2>; };
+        td10: tap_dance_10 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&mkp MB4 &kp HOME>; };
+        td11: tap_dance_11 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&mkp MB5 &kp END>; };
+        td12: tap_dance_12 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp K_NO &to 0>; };
+        td13: tap_dance_13 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp T &kp TAB>; };
         // The first binding `0xb21` is not a standard HID keycode and has been replaced with &kp K_NO.
-        td14: tap_dance_14 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp K_NO>, <&kp LG(N5)>; };
-        td15: tap_dance_15 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp MINUS>, <&kp KP_SLASH>; };
-        td16: tap_dance_16 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp KP_PLUS>, <&kp KP_ASTERISK>; };
+        td14: tap_dance_14 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp K_NO &kp LG(N5)>; };
+        td15: tap_dance_15 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp MINUS &kp KP_SLASH>; };
+        td16: tap_dance_16 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp KP_PLUS &kp KP_ASTERISK>; };
     };
 
     macros {
         macro_wp: macro_wp {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_press &kp W &kp P &macro_release &kp W &kp P>;
+            bindings = <&macro_tap &kp W &kp P>;
         };
         macro_was_it: macro_was_it {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_press &kp W &kp A &kp S &kp SPACE &kp I &kp T &kp QMARK &macro_release>;
+            bindings = <&macro_tap &kp W &kp A &kp S &kp SPACE &kp I &kp T &kp QMARK>;
         };
         macro_ty: macro_ty {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_press &kp T &kp Y &macro_release>;
+            bindings = <&macro_tap &kp T &kp Y>;
         };
     };
 
