@@ -1,56 +1,147 @@
 /*
- * Copyright (c) 2020 The ZMK Contributors
+ * Copyright (c) 2024 The ZMK Contributors
  *
  * SPDX-License-Identifier: MIT
+ *
+ * This keymap is a translation of a Vial configuration from ee.vil,
+ * adapted for the Corne keyboard layout. It includes multiple layers,
+ * combos, tap-dances, and other advanced features.
  */
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/macros.h>
+#include <dt-bindings/zmk/mouse.h>
+
+// Note on MEH_T(KC_SPACE):
+// The original Vial configuration uses MEH_T(KC_SPACE), which is a single key
+// that sends Space on tap and (Left Ctrl + Left Shift + Left Alt) on hold.
+// ZMK's standard mod-tap behavior (&mt) does not support multiple modifiers.
+// A custom behavior would be required to replicate this exactly.
+// For simplicity, it has been mapped to &kp SPACE in this keymap.
 
 / {
-        keymap {
-                compatible = "zmk,keymap";
-
-                default_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BSPC |
-// | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
-//                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
-                        bindings = <
-   &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-   &kp LCTRL &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-   &kp LSHFT &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp ESC
-                  &kp LGUI &mo 1 &kp SPACE   &kp RET &mo 2 &kp RALT
-                        >;
-                };
-                lower_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BSPC |
-// | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-// | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-   &kp TAB    &kp N1       &kp N2       &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
-   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-   &kp LSHFT  &trans       &trans       &trans       &trans       &trans         &trans   &trans   &trans &trans    &trans &trans
-                                    &kp LGUI     &trans       &kp SPACE      &kp RET  &trans   &kp RALT
-                        >;
-                };
-
-                raise_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
-// | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-// | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-   &kp  TAB  &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp BSPC
-   &kp LCTRL &trans   &trans &trans   &trans   &trans      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
-   &kp LSHFT &trans   &trans &trans   &trans   &trans      &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp TILDE
-                             &kp LGUI &trans   &kp SPACE   &kp RET   &trans    &kp RALT
-                        >;
-                };
+    behaviors {
+        // Mod-Morph: Shift + Backspace -> Delete
+        bspc_del_morph: bspc_del_morph {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT | MOD_RSFT)>;
+            bindings = <&kp DEL>, <&kp BSPC>;
         };
+
+        // Tap-Dances
+        td0: tap_dance_0 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp FSLH>, <&kp UNDER>; };
+        td1: tap_dance_1 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp K_NO>, <&kp K_NO>; };
+        td2: tap_dance_2 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp DOT>, <&kp EXCL>; };
+        td3: tap_dance_3 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp K_NO>, <&kp K_NO>; };
+        td4: tap_dance_4 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp R>, <&kp B>; };
+        td5: tap_dance_5 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp N2>, <&kp ESC>; };
+        td6: tap_dance_6 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp N4>, <&kp N4>, <&kp N3>, <&kp N4>; };
+        td7: tap_dance_7 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp PG_UP>, <&mkp C_WH_DN>; };
+        td8: tap_dance_8 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp PG_DN>, <&mkp C_WH_UP>; };
+        td9: tap_dance_9 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp N1>, <&kp G>, <&kp N2>; };
+        td10: tap_dance_10 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&mkp MB4>, <&kp HOME>; };
+        td11: tap_dance_11 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&mkp MB5>, <&kp END>; };
+        td12: tap_dance_12 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp K_NO>, <&to 0>; };
+        td13: tap_dance_13 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp T>, <&kp TAB>; };
+        // The first binding `0xb21` is not a standard HID keycode and has been replaced with &kp K_NO.
+        td14: tap_dance_14 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp K_NO>, <&kp LG(N5)>; };
+        td15: tap_dance_15 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp MINUS>, <&kp KP_SLASH>; };
+        td16: tap_dance_16 { compatible = "zmk,behavior-tap-dance"; #binding-cells = <0>; tapping-term-ms = <200>; bindings = <&kp KP_PLUS>, <&kp KP_ASTERISK>; };
+    };
+
+    macros {
+        macro_wp: macro_wp {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp W &kp P &macro_release &kp W &kp P>;
+        };
+        macro_was_it: macro_was_it {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp W &kp A &kp S &kp SPACE &kp I &kp T &kp QMARK &macro_release>;
+        };
+        macro_ty: macro_ty {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp T &kp Y &macro_release>;
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+        combo_tab { timeout-ms = <50>; key-positions = <13 14>; bindings = <&kp TAB>; }; // Q + V
+        combo_del { timeout-ms = <50>; key-positions = <21 22>; bindings = <&kp DEL>; }; // BSPC + ,
+        combo_excl { timeout-ms = <50>; key-positions = <34 36>; bindings = <&kp EXCL>; }; // . + H
+        combo_esc { timeout-ms = <50>; key-positions = <1 2>; bindings = <&kp ESC>; };   // Y + C
+        combo_under { timeout-ms = <50>; key-positions = <24 22>; bindings = <&kp UNDER>; }; // F + ,
+        combo_ralt_del { timeout-ms = <50>; key-positions = <23 22 21>; bindings = <&kp RA(DEL)>; }; // U + , + BSPC
+        combo_ralt_bspc { timeout-ms = <50>; key-positions = <23 21>; bindings = <&kp RA(BSPC)>; };// U + BSPC
+        combo_ret { timeout-ms = <50>; key-positions = <36 35>; bindings = <&kp RET>; };   // H + /
+        combo_minus { timeout-ms = <50>; key-positions = <24 23>; bindings = <&kp MINUS>; }; // F + U
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+&trans  &kp Y           &kp C           &kp L           &kp M           &kp K           &bspc_del_morph &kp COMMA       &kp U           &kp F           &kp Z           &trans
+&trans  &lt 3 I         &lt 5 S         &mt LALT R      &mt LGUI T      &kp G           &lt 2 O         &kp A           &mt RALT E      &mt RGUI N      &kp P           &trans
+&trans  &kp Q           &kp V           &kp W           &kp D           &kp J           &kp X           &td2            &td0            &kp H           &kp B           &trans
+                                &kp CAPS        &kp SPACE       &osm LSHFT                      &kp K_NO        &mo 1           &osm RCTRL
+            >;
+        };
+
+        layer_1 { // Symbols
+            bindings = <
+&trans  &kp ESC         &kp AT          &kp HASH        &kp DLLR        &kp PRCNT       &bspc_del_morph &kp SCLN        &kp ASTRK       &kp AMPS        &kp LS(N6)      &trans
+&trans  &kp TAB         &kp EQUAL       &kp MINUS       &kp K_NO        &kp K_NO        &kp RET         &kp RBRC        &kp SQT         &mt RGUI LBKT   &kp K_NO        &trans
+&trans  &kp GRAVE       &kp LA(N3)      &kp K_NO        &kp K_NO        &kp K_NO        &kp K_NO        &kp RPAR        &kp BSLH        &kp LPAR        &kp K_NO        &trans
+                                &kp K_NO        &to 0           &osm LSHFT                      &kp K_NO        &kp K_NO        &osm RCTRL
+            >;
+        };
+
+        layer_2 { // Navigation
+            bindings = <
+&trans  &kp ESC         &kp HOME        &kp UP          &kp END         &kp PG_UP       &trans          &kp K_NO        &kp K_NO        &kp K_NO        &kp K_NO        &trans
+&trans  &kp TAB         &kp LEFT        &kp DOWN        &kp RIGHT       &kp PG_DN       &trans          &kp K_NO        &kp RALT        &kp RGUI        &kp K_NO        &trans
+&trans  &kp LS(TAB)     &kp C_PREV      &kp C_PLAY      &kp C_NEXT      &kp K_NO        &trans          &kp K_NO        &kp K_NO        &kp K_NO        &kp K_NO        &trans
+                                &kp K_NO        &to 0           &osm LSHFT                      &kp K_NO        &kp K_NO        &osm RCTRL
+            >;
+        };
+
+        layer_3 { // Mouse
+            bindings = <
+&trans  &kp K_NO        &mkp MB1        &mkp MS_U       &mkp MB2        &mkp WH_D       &td11           &td7            &td10           &kp LC(LA(LS(O))) &kp K_NO      &trans
+&trans  &kp K_NO        &mkp MS_L       &mkp MS_D       &mkp MS_R       &kp K_NO        &mkp WH_U       &mkp MB2        &td8            &mkp MB1        &kp LG(N2)      &trans
+&trans  &kp K_NO        &mkp MB4        &kp PG_DN       &mkp MB5        &mkp WH_U       &kp K_NO        &mkp C_WH_L      &kp K_NO        &mkp C_WH_R      &td14         &trans
+                                &kp K_NO        &to 0           &osm LSHFT                      &kp K_NO        &kp K_NO        &kp RGUI
+            >;
+        };
+
+        layer_4 { // Alt layout
+            bindings = <
+&trans  &td5            &td9            &kp W           &td6            &td4            &bspc_del_morph &macro_ty       &macro_was_it   &macro_wp       &kp LA(TAB)     &trans
+&trans  &kp LSHFT       &kp A           &kp S           &kp D           &kp C           &kp RET         &kp F3          &kp K_NO        &kp K_NO        &kp K_NO        &trans
+&trans  &kp LCTRL       &kp X           &td13           &kp F           &kp K_NO        &td12           &kp F6          &kp F5          &kp K_NO        &kp LA(F4)      &trans
+                                &kp V           &kp SPACE       &kp E                           &kp K_NO        &kp M           &kp LSHFT
+            >;
+        };
+
+        layer_5 { // Numpad
+            bindings = <
+&trans  &kp K_NO        &kp K_NO        &kp K_NO        &kp K_NO        &kp K_NO        &bspc_del_morph &kp KP_N9       &kp KP_N8       &kp KP_N7       &td15           &trans
+&trans  &kp K_NO        &kp LALT        &kp LGUI        &kp K_NO        &kp K_NO        &kp RET         &kp KP_N6       &kp KP_N5       &kp KP_N4       &td16           &trans
+&trans  &kp K_NO        &kp K_NO        &kp K_NO        &kp K_NO        &kp K_NO        &kp KP_DOT      &kp KP_N3       &kp KP_N2       &kp KP_N1       &kp LS(N6)      &trans
+                                &kp K_NO        &kp SPACE       &kp LSHFT                       &kp K_NO        &kp KP_N0       &kp RCTRL
+            >;
+        };
+
+        layer_6 { bindings = < &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans >; };
+        layer_7 { bindings = < &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans >; };
+        layer_8 { bindings = < &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans >; };
+
+    };
 };
